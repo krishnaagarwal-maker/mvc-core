@@ -86,30 +86,35 @@ class StudentController extends Controller
 
     public function update($id){    
 
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header("Location: /public/student/edit/$id");
-            exit;
+        // if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        //     header("Location: /public/student/edit/$id");
+        //     exit;
+        // }
+        $request = new Request();
+        if($request->method() !== "POST"){
+            $this->redirect("/public/student/edit/$id");
         }
         
         // $name = $_POST["name"];
         // $email = $_POST["email"];
         // $age = $_POST["age"];
         // $gender = $_POST["gender"];
-        $name = $request->post["name"];
-        $email = $request->post["email"];
-        $age = $request->post["age"];
-        $gender = $request->post["gender"];
+        $name = $request->post("name");
+        $email = $request->post("email");
+        $age = $request->post("age");
+        $gender = $request->post("gender");
 
         $studentModel = new Student();
         $studentModel->update($id,$name, $email, $age, $gender);
-        header("Location: /public/student/");
-        exit();
+        // header("Location: /public/student/");
+        // exit();
+        $this->redirect("/public/student/");
     }
 
     public function delete($id){
         $studentModel = new Student();
         $studentModel->delete($id);
-        header("Location: /public/student/");
-        // $this->redirect('/public/student/');
+        // header("Location: /public/student/");
+        $this->redirect('/public/student/');
     }
 }
