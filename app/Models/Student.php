@@ -1,9 +1,9 @@
 <?php
 
 namespace App\models;
-use App\models\Models;
+use App\Models\Model;
 
-class Student extends Models{
+class Student extends Model{
 
     public function getAll(){
     $sql = "SELECT * FROM students";
@@ -25,7 +25,7 @@ class Student extends Models{
     $sql = "SELECT * from students WHERE id =?";
     $stmt = $this->db->prepare($sql);
     $stmt->execute([$id]);
-    $stmt->fetch();
+    return $stmt->fetch();
   }
   
 

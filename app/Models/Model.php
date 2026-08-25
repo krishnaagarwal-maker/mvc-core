@@ -1,8 +1,8 @@
 <?php
-namespace App\models;
+namespace App\Models;
 use config\Database;
 use PDO;
-class Models
+class Model
 {
     protected PDO $db;
     public function __construct(){

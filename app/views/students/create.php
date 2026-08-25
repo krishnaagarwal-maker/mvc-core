@@ -1,3 +1,12 @@
+<?php if (!empty($errors)){
+
+foreach ($errors as $error){ ?>
+
+    <p><?= $error ?></p>
+<?php }
+} ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

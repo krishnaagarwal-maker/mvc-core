@@ -43,31 +43,34 @@ $routes = require '../routes/web.php';
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-$route = null;
-$params = [];
+// $route = null;
+// $params = [];
 
-// Check routesx
-foreach ($routes as $routePattern => $routeConfig) {
-    // Convert id
-    $pattern = '@^' . preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_]+)',$routePattern ) . '$@';    
-    if (preg_match($pattern, $url, $matches)) {
-        $route = $routeConfig;
-        array_shift($matches);
-        $params = $matches;
-        break;
-    }
-}
+// // Check routesx
+// foreach ($routes as $routePattern => $routeConfig) {
+//     // Convert id
+//     $pattern = '@^' . preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_]+)',$routePattern ) . '$@';    
+//     if (preg_match($pattern, $url, $matches)) {
+//         $route = $routeConfig;
+//         array_shift($matches);
+//         $params = $matches;
+//         break;
+//     }
+// }
 
-if ($route) {
+// if ($route) {
 
-    $controller = $route[0];
-    $method = $route[1];
-    $controllername = "App\\Controllers\\" . $controller;
-    $controller = new $controllername();
-    $result = $controller->$method(...$params);
-    echo $result;
-} 
-else 
-{
-    echo " Route Not Found";
-}
+//     $controller = $route[0];    
+//     $method = $route[1];
+//     $controllername = "App\\Controllers\\" . $controller;
+//     $controller = new $controllername();
+//     $result = $controller->$method(...$params);
+//     echo $result;
+// } 
+// else 
+// {
+//     echo " Route Not Found";
+// }
+
+$router = new App\Core\Router($routes);
+echo $router->patch($url);
